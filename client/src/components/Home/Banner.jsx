@@ -54,7 +54,6 @@ const Banner = () => {
           return <Image src={data.url} alt="banner" />;
         })}
       </Carousel>
-      ;
     </>
   );
 };
