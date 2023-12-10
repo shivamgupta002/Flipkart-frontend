@@ -5,7 +5,7 @@ const Connection = async (USERNAME, PASSWORD) => {
   const URL = `mongodb+srv://${USERNAME}:${PASSWORD}@e-commerce.nvezefc.mongodb.net/?retryWrites=true&w=majority`;
   //########################################################################
   // This is for local mongodb
-  //   const URL = "mongodb://localhost:27017/flipKart";
+    // const URL = "mongodb://localhost:27017/flipKart";
 
   try {
     await mongoose.connect(URL);
