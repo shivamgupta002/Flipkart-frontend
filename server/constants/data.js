@@ -143,7 +143,6 @@ export const products = [
   },
 ];
 
-// login/Signup image: https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/login_img_c4a81e.png
 
 // const timerURL = 'https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/timer_a73398.svg';
 
