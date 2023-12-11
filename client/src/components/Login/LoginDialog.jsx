@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { authenticateSignUp } from "../../service/api";
+import { DataContext } from "../../context/DataProvider";
 import {
   Box,
   Button,
@@ -88,10 +89,11 @@ const signUpInitialValues = {
   password: "",
   phone: "",
 };
-
+// ----------------------------------------------------------------------------
 const LoginDialog = ({ open, setOpen }) => {
   const [account, toggleAccount] = useState(accountInitialValue.login);
   const [signUp, setSignUp] = useState(signUpInitialValues);
+  const { setAccount } = useContext(DataContext);
 
   const handleClose = () => {
     setOpen(false);
@@ -104,12 +106,15 @@ const LoginDialog = ({ open, setOpen }) => {
 
   const onInputChange = (e) => {
     setSignUp({ ...signUp, [e.target.name]: e.target.value });
-    console.log(signUp);
+    // console.log(signUp);
   };
 
   const signUpUser = async (e) => {
     let response = await authenticateSignUp(signUp);
-    console.log(response);
+    // console.log(response);
+    if (!response) return;
+    handleClose();
+    setAccount(signUp.firstName);
   };
 
   return (
