@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { authenticateSignUp } from "../../service/api";
 import {
   Box,
   Button,
@@ -24,7 +25,6 @@ const Wrapper = styled(Box)`
     margin-top: 20px;
   }
 `;
-
 const Image = styled(Box)`
   background: #287460
     url(https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/login_img_c4a81e.png)
@@ -38,7 +38,6 @@ const Image = styled(Box)`
     font-weight: 600;
   }
 `;
-
 const LoginButton = styled(Button)`
   text-transform: none;
   background: #fb641b;
@@ -56,7 +55,6 @@ const RequestOTP = styled(Button)`
   border-radius: 2px;
   box-shadow: 0 2px 4px rgb(0 0 0/ 20%);
 `;
-
 const Text = styled(Typography)`
   font-size: 12px;
   color: #878787;
@@ -82,8 +80,19 @@ const accountInitialValue = {
   },
 };
 
+const signUpInitialValues = {
+  firstName: "",
+  lastName: "",
+  userName: "",
+  email: "",
+  password: "",
+  phone: "",
+};
+
 const LoginDialog = ({ open, setOpen }) => {
   const [account, toggleAccount] = useState(accountInitialValue.login);
+  const [signUp, setSignUp] = useState(signUpInitialValues);
+
   const handleClose = () => {
     setOpen(false);
     toggleAccount(accountInitialValue.login);
@@ -92,6 +101,17 @@ const LoginDialog = ({ open, setOpen }) => {
   const toggleSignup = () => {
     toggleAccount(accountInitialValue.signup);
   };
+
+  const onInputChange = (e) => {
+    setSignUp({ ...signUp, [e.target.name]: e.target.value });
+    console.log(signUp);
+  };
+
+  const signUpUser = async (e) => {
+    let response = await authenticateSignUp(signUp);
+    console.log(response);
+  };
+
   return (
     <>
       <Dialog
@@ -131,13 +151,43 @@ const LoginDialog = ({ open, setOpen }) => {
               // SignUPFrame
 
               <Wrapper>
-                <TextField variant="standard" label="Enter First Name" />
-                <TextField variant="standard" label="Enter Last Name" />
-                <TextField variant="standard" label="Enter UserName" />
-                <TextField variant="standard" label="Enter Email" />
-                <TextField variant="standard" label="Enter Password" />
-                <TextField variant="standard" label="Enter Phone" />
-                <RequestOTP>Continue</RequestOTP>
+                <TextField
+                  variant="standard"
+                  label="Enter First Name"
+                  name="firstName"
+                  onChange={(e) => onInputChange(e)}
+                />
+                <TextField
+                  variant="standard"
+                  label="Enter Last Name"
+                  name="lastName"
+                  onChange={(e) => onInputChange(e)}
+                />
+                <TextField
+                  variant="standard"
+                  label="Enter UserName"
+                  name="userName"
+                  onChange={(e) => onInputChange(e)}
+                />
+                <TextField
+                  variant="standard"
+                  label="Enter Email"
+                  name="email"
+                  onChange={(e) => onInputChange(e)}
+                />
+                <TextField
+                  variant="standard"
+                  label="Enter Password"
+                  name="password"
+                  onChange={(e) => onInputChange(e)}
+                />
+                <TextField
+                  variant="standard"
+                  label="Enter Phone"
+                  name="phone"
+                  onChange={(e) => onInputChange(e)}
+                />
+                <LoginButton onClick={() => signUpUser()}>Continue</LoginButton>
                 <CreateAccount
                   onClick={() => toggleAccount(accountInitialValue.login)}
                 >
