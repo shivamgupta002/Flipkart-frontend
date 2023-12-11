@@ -2,10 +2,10 @@ import mongoose from "mongoose";
 
 const Connection = async (USERNAME, PASSWORD) => {
   //--------------------- This url is for mongodb Cloud -------------------------
-  const URL = `mongodb+srv://${USERNAME}:${PASSWORD}@e-commerce.nvezefc.mongodb.net/?retryWrites=true&w=majority`;
+  // const URL = `mongodb+srv://${USERNAME}:${PASSWORD}@e-commerce.nvezefc.mongodb.net/?retryWrites=true&w=majority`;
   //########################################################################
   // This is for local mongodb
-    // const URL = "mongodb://localhost:27017/flipKart";
+    const URL = "mongodb://localhost:27017/flipKart";
 
   try {
     await mongoose.connect(URL);
