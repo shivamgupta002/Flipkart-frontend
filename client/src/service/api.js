@@ -8,3 +8,10 @@ export const authenticateSignUp = async (data) => {
     console.log("Error while signUp api", e.message);
   }
 };
+export const authenticateLogin = async (data) => {
+  try {
+    return await axios.post(`${URL}/login`, data);
+  } catch (e) {
+    console.log("Error while Login api", e.message);
+  }
+};

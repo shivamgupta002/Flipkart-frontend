@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { authenticateSignUp } from "../../service/api";
+import { authenticateSignUp, authenticateLogin } from "../../service/api";
 import { DataContext } from "../../context/DataProvider";
 import {
   Box,
@@ -89,10 +89,15 @@ const signUpInitialValues = {
   password: "",
   phone: "",
 };
+const loginInitialValues = {
+  userName: "",
+  password: "",
+};
 // ----------------------------------------------------------------------------
 const LoginDialog = ({ open, setOpen }) => {
   const [account, toggleAccount] = useState(accountInitialValue.login);
   const [signUp, setSignUp] = useState(signUpInitialValues);
+  const [login, setLogin] = useState(loginInitialValues);
   const { setAccount } = useContext(DataContext);
 
   const handleClose = () => {
@@ -108,13 +113,21 @@ const LoginDialog = ({ open, setOpen }) => {
     setSignUp({ ...signUp, [e.target.name]: e.target.value });
     // console.log(signUp);
   };
-
+  const onValueChange = (e) => {
+    setLogin({ ...login, [e.target.name]: e.target.value });
+  };
   const signUpUser = async (e) => {
     let response = await authenticateSignUp(signUp);
     // console.log(response);
     if (!response) return;
     handleClose();
     setAccount(signUp.firstName);
+  };
+
+  const loginUser = async (e) => {
+    let response = await authenticateLogin(login);
+    if (!response) return;
+    handleClose();
   };
 
   return (
@@ -139,13 +152,21 @@ const LoginDialog = ({ open, setOpen }) => {
                 <TextField
                   variant="standard"
                   label="Enter Email / Mobile Number"
+                  name="userName"
+                  onChange={(e) => onValueChange(e)}
                 />
-                <TextField variant="standard" label="Enter Password" />
+
+                <TextField
+                  variant="standard"
+                  label="Enter Password"
+                  name="password"
+                  onChange={(e) => onValueChange(e)}
+                />
                 <Text>
                   By continuing,you agree to FlipKart's Terms of Use and Privacy
                   Policy
                 </Text>
-                <LoginButton>Login</LoginButton>
+                <LoginButton onClick={() => loginUser()}>Login</LoginButton>
                 <Typography style={{ textAlign: "center" }}>OR</Typography>
                 <RequestOTP>Request OTP</RequestOTP>
                 <CreateAccount onClick={() => toggleSignup()}>
