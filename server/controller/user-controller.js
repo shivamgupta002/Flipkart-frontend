@@ -13,6 +13,23 @@ export const userSignUp = async (req, res) => {
     res.status(200).json({ message: user });
   } catch (e) {
     console.log("Error find in userSignUp controller due to ", e.message);
-    res.status(500).json({ message: e.message });
+    return res.status(500).json({ message: e.message });
+  }
+};
+
+export const userLogin = async (req, res) => {
+  try {
+    const userName = req.body.userName;
+    const password = req.body.password;
+    let user = await User.findOne({ userName: userName, password: password });
+    if (user) {
+      return res.status(200).json(`${userName} login successfully`);
+    } else {
+      return res.status(401).json("Invalid Login");
+    }
+  } catch (error) {
+    console.log("Error find in userLogin controller due to ", error.message);
+    // console.log(error.message);
+    return res.status(500).json(error.message);
   }
 };
