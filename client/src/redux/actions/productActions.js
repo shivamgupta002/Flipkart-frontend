@@ -7,7 +7,7 @@ const URL = "http://localhost:5000";
 export const getProducts = () => async (dispatch) => {
   try {
     const { data } = await axios.get(`${URL}/products`);
-    console.log(data);
+    // console.log(data);
 
     dispatch({ type: actionTypes.GET_PRODUCTS_SUCCESS, payload: data });
   } catch (e) {
