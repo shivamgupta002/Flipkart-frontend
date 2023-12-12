@@ -29,7 +29,6 @@ export const userLogin = async (req, res) => {
     }
   } catch (error) {
     console.log("Error find in userLogin controller due to ", error.message);
-    // console.log(error.message);
     return res.status(500).json(error.message);
   }
 };
