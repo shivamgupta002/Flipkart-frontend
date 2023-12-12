@@ -67,6 +67,13 @@ const CreateAccount = styled(Typography)`
   font-weight: 600;
   cursor: pointer;
 `;
+const Error = styled(Typography)`
+  font-size: 10px;
+  color: #ff6161;
+  line-height: 0;
+  margin-top: 10px;
+  font-weight: 600;
+`;
 // ------------------------------------------------------------------
 const accountInitialValue = {
   login: {
@@ -98,10 +105,13 @@ const LoginDialog = ({ open, setOpen }) => {
   const [account, toggleAccount] = useState(accountInitialValue.login);
   const [signUp, setSignUp] = useState(signUpInitialValues);
   const [login, setLogin] = useState(loginInitialValues);
+  const [error, setError] = useState(false);
+
   const { setAccount } = useContext(DataContext);
 
   const handleClose = () => {
     setOpen(false);
+    setError(false);
     toggleAccount(accountInitialValue.login);
   };
 
@@ -126,8 +136,13 @@ const LoginDialog = ({ open, setOpen }) => {
 
   const loginUser = async (e) => {
     let response = await authenticateLogin(login);
-    if (!response) return;
-    handleClose();
+    // console.log(response);
+    if (response.status === 200) {
+      handleClose();
+      setAccount(response.data.data.firstName);
+    } else {
+      setError(true);
+    }
   };
 
   return (
@@ -151,11 +166,13 @@ const LoginDialog = ({ open, setOpen }) => {
               <Wrapper>
                 <TextField
                   variant="standard"
-                  label="Enter Email / Mobile Number"
+                  label="Enter UserName"
                   name="userName"
                   onChange={(e) => onValueChange(e)}
                 />
-
+                {error && (
+                  <Error>Please enter valid username or password </Error>
+                )}
                 <TextField
                   variant="standard"
                   label="Enter Password"
