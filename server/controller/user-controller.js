@@ -23,7 +23,7 @@ export const userLogin = async (req, res) => {
     const password = req.body.password;
     let user = await User.findOne({ userName: userName, password: password });
     if (user) {
-      return res.status(200).json(`${userName} login successfully`);
+      return res.status(200).json({ data: user });
     } else {
       return res.status(401).json("Invalid Login");
     }
