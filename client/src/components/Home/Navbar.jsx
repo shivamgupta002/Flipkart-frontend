@@ -2,11 +2,16 @@ import React from "react";
 import { Box, Typography, styled } from "@mui/material";
 import { navData } from "../../constants/data";
 
-const Component = styled(Box)`
-  display: flex;
-  justify-content: space-between;
-  margin: 55px 130px 0 130px;
-`;
+const Component = styled(Box)(({ theme }) => ({
+  display: "flex",
+  justifyContent: "space-between",
+  margin: "55px 130px 0 130px",
+  // overflow: "overlay",
+  overflow: 'hidden',
+  [theme.breakpoints.down("lg")]: {
+    margin: 0,
+  },
+}));
 const Container = styled(Box)`
   padding: 12px 8px;
   text-align: center;
