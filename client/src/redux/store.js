@@ -1,10 +1,10 @@
 import {
   configureStore,
   combineReducers,
-    applyMiddleware,
+  applyMiddleware,
 } from "@reduxjs/toolkit";
 
-import {thunk} from "redux-thunk";
+import { thunk } from "redux-thunk";
 
 import { composeWithDevTools } from "@redux-devtools/extension";
 import { getProductsReducer } from "./reducers/productReducers";
@@ -18,6 +18,6 @@ const store = configureStore(
   {
     reducer,
   },
-    composeWithDevTools(applyMiddleware(...middleware))
+  composeWithDevTools(applyMiddleware(...middleware))
 );
 export default store;
