@@ -11,7 +11,23 @@ export const getProducts = () => async (dispatch) => {
 
     dispatch({ type: actionTypes.GET_PRODUCTS_SUCCESS, payload: data });
   } catch (e) {
-    // console.log("Error while calling getProduct in redux folder", e.message);
+    console.log("Error while calling getProduct in redux folder", e.message);
     dispatch({ type: actionTypes.GET_PRODUCTS_FAIL, payload: e.message });
+  }
+};
+export const getProductDetails = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: actionTypes.GET_PRODUCTS_DETAILS_REQUEST });
+    const { data } = await axios.get(`${URL}/product/${id}`);
+    dispatch({ type: actionTypes.GET_PRODUCTS_DETAILS_SUCCESS, payload: data });
+  } catch (e) {
+    console.log(
+      "Error while calling getProduct details in redux folder",
+      e.message
+    );
+    dispatch({
+      type: actionTypes.GET_PRODUCTS_DETAILS_FAIL,
+      payload: e.message,
+    });
   }
 };
