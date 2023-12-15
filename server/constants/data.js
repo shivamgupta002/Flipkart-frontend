@@ -95,7 +95,8 @@ export const products = [
       discount: "40%",
     },
     quantity: 1,
-    description: "",
+    description:
+      "Nova hair dryer is a world class and cheapest air dryer compare to other product.Its very cool in Looks and affordable.Lets dry your hair with cool looks. ",
     discount: "From ₹499",
     tagline: "Kubra, Nova & more",
   },
@@ -142,5 +143,3 @@ export const products = [
     tagline: "Grab Now!",
   },
 ];
-
-
