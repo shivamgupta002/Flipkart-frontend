@@ -23,7 +23,11 @@ const StyleButton = styled(Button)(({ theme }) => ({
   borderRadius: "3px",
   [theme.breakpoints.down("lg")]: {
     width: "40%",
-    margin: "0 10px",
+    margin: "5px 10px",
+  },
+  [theme.breakpoints.down("sm")]: {
+    width: "48%",
+    margin: "5px 10px",
   },
 }));
 
