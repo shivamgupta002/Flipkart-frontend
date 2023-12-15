@@ -1,5 +1,17 @@
-import React from "react";
-import { AppBar, Toolbar, Box, styled, Typography } from "@mui/material";
+import React, { useState } from "react";
+import {
+  AppBar,
+  Toolbar,
+  Box,
+  styled,
+  Typography,
+  IconButton,
+  Drawer,
+  List,
+  ListItem,
+} from "@mui/material";
+import Menu from "@mui/icons-material/Menu";
+
 import Search from "./Search";
 import CustomButtons from "./CustomButtons";
 
@@ -26,6 +38,22 @@ const PlusImage = styled("img")({
   marginLeft: 5,
   marginTop: 2,
 });
+
+const CustomButtonWrapper = styled(Box)(({ theme }) => ({
+  margin: "0 5% 0 auto",
+  alignItem: "center",
+  [theme.breakpoints.down("md")]: {
+    display: "none",
+  },
+}));
+
+const MenuButton = styled(IconButton)(({ theme }) => ({
+  display: "none",
+  [theme.breakpoints.down("md")]: {
+    display: "block",
+  },
+}));
+
 // ------------------------------ Header --------------------------------------------
 const Header = () => {
   const logoUrl =
@@ -33,10 +61,33 @@ const Header = () => {
   const subUrl =
     "https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/plus_aef861.png";
 
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const list = () => (
+    <Box onClick={handleClose}>
+      <List>
+        <ListItem button>
+          <CustomButtons />
+        </ListItem>
+      </List>
+    </Box>
+  );
+
   return (
     <>
       <StyleHeader>
         <Toolbar style={{ minHeight: "55px" }}>
+          <MenuButton color="inherit" onClick={handleOpen}>
+            <Menu />
+          </MenuButton>
+          <Drawer open={open} onClose={handleClose}>
+            {list()}
+          </Drawer>
           <Component to="/">
             <img src={logoUrl} alt="logo" style={{ width: "75px" }} />
             <Box style={{ display: "flex" }}>
@@ -50,7 +101,9 @@ const Header = () => {
             </Box>
           </Component>
           <Search />
-          <CustomButtons />
+          <CustomButtonWrapper>
+            <CustomButtons />
+          </CustomButtonWrapper>
         </Toolbar>
       </StyleHeader>
     </>

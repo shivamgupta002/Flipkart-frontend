@@ -5,7 +5,7 @@ const SearchContainer = styled(Box)`
   background: #fff;
   width: 38%;
   border-radius: 5px;
-  margin-left: 10px;
+  margin: 0 10px;
   display: flex;
 `;
 const InputSearchBase = styled(InputBase)`
