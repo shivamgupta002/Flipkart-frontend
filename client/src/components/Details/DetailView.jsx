@@ -5,27 +5,31 @@ import { useParams } from "react-router-dom";
 
 import { getProductDetails } from "../../redux/actions/productActions";
 
-import { Box, Typography, Grid, styled } from "@mui/material";
+import { Box, Grid, styled } from "@mui/material";
 import ActionItem from "./ActionItem";
+import ProductDetail from "./ProductDetail";
 
 const Component = styled(Box)`
   background: #f2f2f2;
   margin-top: 55px;
 `;
-const Container = styled(Grid)`
-  background: #fff;
-  display: flex;
-`;
+const Container = styled(Grid)(({ theme }) => ({
+  background: "#fff",
+  display: "flex",
+  [theme.breakpoints.down("md")]: {
+    margin: 0,
+  },
+}));
+
 const RightContainer = styled(Box)`
   margin-top: 50px;
+  margin-left: 7px;
 `;
 
 // ################################################################
 const DetailView = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const fassured =
-    "https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/fa_62673a.png";
 
   const { loading, product } = useSelector((state) => state.getProductDetails);
 
@@ -34,7 +38,7 @@ const DetailView = () => {
       dispatch(getProductDetails(id));
     }
   }, [dispatch, id, loading, product]);
-  console.log(product);
+  // console.log(product);
   return (
     <>
       <Component>
@@ -44,30 +48,7 @@ const DetailView = () => {
               <ActionItem product={product} />
             </Grid>
             <RightContainer item lg={8} md={8} sm={8} xs={12}>
-              <Typography>{product.title.longTitle}</Typography>
-              <Typography style={{ marginTop: 5, color: "#878787" }}>
-                8 Ratings & 1 review
-              </Typography>
-              <Box component="span">
-                <img
-                  src={fassured}
-                  alt="fassured img"
-                  style={{ width: 77, marginLeft: 20 }}
-                />
-              </Box>
-              <Typography>
-                <Box component="span" style={{ fontSize: 28 }}>
-                 ${product.price.cost}
-                  &nbsp;&nbsp;
-                </Box>
-                <Box component="span" style={{ color: "#878787" }}>
-                  <strike>{product.price.mrp}</strike>
-                  &nbsp;&nbsp;
-                </Box>
-                <Box component="span" style={{ color: "#388e3c" }}>
-                  {product.price.discount}
-                </Box>
-              </Typography>
+              <ProductDetail product={product} />
             </RightContainer>
           </Container>
         )}
