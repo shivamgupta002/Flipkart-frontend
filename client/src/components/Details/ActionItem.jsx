@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { Box, Button, styled } from "@mui/material";
 import Cart from "@mui/icons-material/ShoppingCart";
 import Flash from "@mui/icons-material/FlashOn";
+
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../redux/actions/cartActions";
 
 const LeftContainer = styled(Box)(({ theme }) => ({
   minWidth: " 40%",
@@ -33,6 +37,15 @@ const StyleButton = styled(Button)(({ theme }) => ({
 
 // ###################################################################
 const ActionItem = ({ product }) => {
+  const dispatch = useDispatch();
+  const Navigate = useNavigate();
+  const [quantity, setQuantity] = useState(1);
+  const { id } = product;
+
+  const addItemToCart = () => {
+    dispatch(addToCart(id, quantity));
+    Navigate("/cart");
+  };
   return (
     <>
       <LeftContainer>
@@ -51,7 +64,11 @@ const ActionItem = ({ product }) => {
         >
           <Cart /> Buy Now
         </StyleButton>
-        <StyleButton variant="contained" style={{ background: "#fb541b" }}>
+        <StyleButton
+          variant="contained"
+          style={{ background: "#fb541b" }}
+          onClick={() => addItemToCart()}
+        >
           <Flash /> Add to Cart
         </StyleButton>
       </LeftContainer>
