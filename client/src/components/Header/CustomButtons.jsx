@@ -10,7 +10,7 @@ const Wrapper = styled(Box)(({ theme }) => ({
   display: "flex",
   margin: "0 3% 0 auto",
   " & >*": {
-    marginRight: "40px",
+    marginRight: "35px !important",
     fontSize: "16px",
     alignItems: "center",
   },
