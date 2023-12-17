@@ -26,7 +26,6 @@ export const imageURL = [
     "https://rukminim1.flixcart.com/flap/960/960/image/1ce0c4c1fb501b45.jpg?q=50",
   ];
 
-// const imgurl = 'https://rukminim1.flixcart.com/www/800/800/promos/16/05/2019/d438a32e-765a-4d8b-b4a6-520b560971e8.png?q=90';
 
 // function isDate(val) {
 //     // Cross realm comptatible
