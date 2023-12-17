@@ -7,7 +7,7 @@ const Component = styled(Box)(({ theme }) => ({
   justifyContent: "space-between",
   margin: "55px 130px 0 130px",
   // overflow: "overlay",
-  overflow: 'hidden',
+  overflow: "hidden",
   [theme.breakpoints.down("lg")]: {
     margin: 0,
   },
@@ -25,16 +25,22 @@ const Text = styled(Typography)`
 const Navbar = () => {
   return (
     <>
-      <Component>
-        {navData.map((data) => {
-          return (
-            <Container>
-              <img src={data.url} alt="nav" style={{ width: "65px" }} />
-              <Text>{data.text}</Text>
-            </Container>
-          );
-        })}
-      </Component>
+      <Box
+        style={{
+          backgroundColor: "#fff",
+        }}
+      >
+        <Component>
+          {navData.map((data) => {
+            return (
+              <Container>
+                <img src={data.url} alt="nav" style={{ width: "65px" }} />
+                <Text>{data.text}</Text>
+              </Container>
+            );
+          })}
+        </Component>
+      </Box>
     </>
   );
 };
