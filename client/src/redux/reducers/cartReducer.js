@@ -10,10 +10,10 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
           ...state,
           cartItems: state.cartItems.map((data) =>
             data.product === exist.product ? item : data
-          ),
+          )
         };
       } else {
-        return { ...state, cartItems: { ...state.cartItems, item } };
+        return { ...state, cartItems: [ ...state.cartItems, item ] };
       }
 
     case actionType.REMOVE_TO_CART:
