@@ -1,6 +1,9 @@
 import React from "react";
 import { addEllipsis } from "../../utils/CommonUtils";
 import { Box, Typography, Button, styled } from "@mui/material";
+import { useDispatch } from "react-redux";
+
+import { removeFromCart } from "../../redux/actions/cartActions";
 
 import ButtonGroup from "./ButtonGroup";
 
@@ -30,6 +33,10 @@ const CartItem = ({ item }) => {
   const fassured =
     "https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/fa_62673a.png";
 
+  const dispatch = useDispatch();
+  const removeItemFromCart = (id) => {
+    dispatch(removeFromCart(id));
+  };
   return (
     <>
       <Component>
@@ -66,7 +73,7 @@ const CartItem = ({ item }) => {
               {item.price.discount}
             </Box>
           </Typography>
-          <Remove>Remove</Remove>
+          <Remove onClick={() => removeItemFromCart(item.id)}>Remove</Remove>
         </Box>
       </Component>
     </>
