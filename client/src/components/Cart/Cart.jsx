@@ -50,7 +50,7 @@ const Cart = () => {
             </ButtonWrapper>
           </Grid>
           <Grid item lg={3} md={3} sm={12} xs={12}>
-            <TotalView />
+            <TotalView cartItems={cartItems} />
           </Grid>
         </Container>
       ) : (

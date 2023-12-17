@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Typography, ButtonGroup, Button, styled } from "@mui/material";
+import { ButtonGroup, Button, styled } from "@mui/material";
 
 const Component = styled(ButtonGroup)`
   margin-top: 30px;
