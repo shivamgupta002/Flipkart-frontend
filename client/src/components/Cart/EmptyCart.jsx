@@ -1,12 +1,18 @@
 import React from "react";
 import { Box, Typography, styled } from "@mui/material";
 
-const Component = styled(Box)`
-  height: 65vh;
-  width: 80%;
-  background-color: #fff;
-  margin: 80px 140px;
-`;
+const Component = styled(Box)(({ theme }) => ({
+  height: "67vh",
+  width: "80%",
+  backgroundColor: "#fff",
+  marginTop: "10%",
+  marginLeft: "10%",
+  [theme.breakpoints.down("md")]: {
+    marginTop: "25%",
+    height: "50vh",
+  },
+}));
+
 const Container = styled(Box)`
   text-align: center;
   padding-top: 70px;
