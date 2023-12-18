@@ -27,7 +27,8 @@ const SearchIconWrapper = styled(Box)`
 const ListWrapper = styled(List)`
   position: absolute;
   background: #ffffff;
-  color: #0000;
+  color: #000;
+  margin-top:"150px";
 `;
 
 // ##############################################
@@ -54,7 +55,7 @@ const Search = () => {
           <SearchIcons />
         </SearchIconWrapper>
         {text && (
-          <ListWrapper>
+          <ListWrapper style={{marginTop:"2.96%"}}>
             {products
               .filter((product) =>
                 product.title.longTitle
@@ -63,7 +64,7 @@ const Search = () => {
               )
               .map((product) => {
                 return (
-                  <ListItem>
+                  <ListItem >
                     <Link
                       to={`/product/${product.id}`}
                       onClick={() => setText("")}
