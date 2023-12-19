@@ -4,7 +4,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 
 import Connection from "./database/db.js";
-import DefaultData from "./default.js";
+// import DefaultData from "./default.js";
 import Router from "./routes/routes.js";
 
 const app = express();
@@ -24,4 +24,4 @@ app.listen(PORT, () => {
   console.log(`Server is running on ${PORT}`);
 });
 
-DefaultData();
+// DefaultData();
