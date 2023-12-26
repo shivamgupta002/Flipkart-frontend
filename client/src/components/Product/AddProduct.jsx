@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { addProduct } from "../../service/api";
 import {
   TextField,
   Button,
@@ -42,33 +43,43 @@ const ProductForm = () => {
     },
     quantity: 1,
     description: "",
-    discount: "",
+    ExtraDiscount: "",
     tagline: "",
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    // setFormData({ ...formData, [name]: value });
+    if (name.includes(".")) {
+      // Handle nested properties
+      const [parent, child] = name.split(".");
+      setFormData({
+        ...formData,
+        [parent]: {
+          ...formData[parent],
+          [child]: value,
+        },
+      });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(formData);
+try{
 
-    fetch("your-backend-api-endpoint", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Success:", data);
-        // Reset form or redirect to another page as needed
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+  let response = await addProduct(formData);
+    if (!response) {
+      console.log("not submitted");
+    } else {
+      console.log(response);
+    }
+  }catch(e){
+    console.log(e.message);
+
+  }
   };
 
   return (
@@ -107,7 +118,7 @@ const ProductForm = () => {
           <Grid item lg={6} md={10} sm={12} xs={12}>
             <TextField
               label="Short Title"
-              name="shortTitle"
+              name="title.shortTitle"
               value={formData.title.shortTitle}
               onChange={handleChange}
               fullWidth
@@ -116,7 +127,7 @@ const ProductForm = () => {
           <Grid item lg={6} md={10} sm={12} xs={12}>
             <TextField
               label="Long Title"
-              name="longTitle"
+              name="title.longTitle"
               value={formData.title.longTitle}
               onChange={handleChange}
               fullWidth
@@ -125,7 +136,7 @@ const ProductForm = () => {
           <Grid item lg={6} md={10} sm={12} xs={12}>
             <TextField
               label="MRP"
-              name="mrp"
+              name="price.mrp"
               value={formData.price.mrp}
               onChange={handleChange}
               fullWidth
@@ -134,7 +145,7 @@ const ProductForm = () => {
           <Grid item lg={6} md={10} sm={12} xs={12}>
             <TextField
               label="Cost"
-              name="cost"
+              name="price.cost"
               value={formData.price.cost}
               onChange={handleChange}
               fullWidth
@@ -143,7 +154,7 @@ const ProductForm = () => {
           <Grid item lg={6} md={10} sm={12} xs={12}>
             <TextField
               label="Discount"
-              name="discount"
+              name="price.discount"
               value={formData.price.discount}
               onChange={handleChange}
               fullWidth
@@ -169,9 +180,9 @@ const ProductForm = () => {
           </Grid>
           <Grid item lg={6} md={10} sm={12} xs={12}>
             <TextField
-              label="Discount"
-              name="discount"
-              value={formData.discount}
+              label="Extra Discount"
+              name="ExtraDiscount"
+              value={formData.ExtraDiscount}
               onChange={handleChange}
               fullWidth
             />

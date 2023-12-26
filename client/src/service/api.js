@@ -16,3 +16,12 @@ export const authenticateLogin = async (data) => {
     return e.response;
   }
 };
+export const addProduct = async (data) => {
+  try {
+    // console.log(data);
+    return await axios.post(`${URL}/addProduct`, data);
+  } catch (e) {
+    console.log("Error while Add Product api", e.message);
+    // return e.response;
+  }
+};

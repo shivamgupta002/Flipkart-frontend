@@ -9,7 +9,7 @@ export const addProduct = async (req, res) => {
     price,
     quantity,
     description,
-    discount,
+    ExtraDiscount,
     tagline,
   } = req.body;
   try {
@@ -21,7 +21,7 @@ export const addProduct = async (req, res) => {
       price &&
       quantity &&
       description &&
-      discount &&
+      ExtraDiscount &&
       tagline
     ) {
       const isProduct = await Product.findOne({ id: id });
@@ -38,7 +38,7 @@ export const addProduct = async (req, res) => {
           price,
           quantity,
           description,
-          discount,
+          ExtraDiscount,
           tagline,
         }).save();
         if (newProduct) {
