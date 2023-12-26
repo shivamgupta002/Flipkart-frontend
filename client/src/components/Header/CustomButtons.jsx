@@ -58,9 +58,17 @@ const CustomButtons = () => {
         </LoginButton>
       )}
 
-      <Typography style={{ marginTop: 3, width: 135 }}>
+      <Link
+        style={{
+          marginTop: 3,
+          width: 135,
+          textDecoration: "none",
+          color: "#fff",
+        }}
+        to="/addProduct"
+      >
         Become a seller
-      </Typography>
+      </Link>
       <Typography style={{ marginTop: 3 }}>More</Typography>
 
       <Container to="/cart">
