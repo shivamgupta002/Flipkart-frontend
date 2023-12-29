@@ -1,14 +1,20 @@
 import axios from "axios";
-
 import * as actionTypes from "../constants/productConstant";
 
 const URL = "http://localhost:5000";
 
-export const getProducts = () => async (dispatch) => {
+export const getProducts = () => async (dispatch, getState) => {
+  const { products } = getState().getProducts;
+  // console.log(products);
+  // If products are already present, return and don't make the request again
+  if (products.length > 0) {
+    console.warn("hey product found");
+    return;
+  }
+
   try {
     const { data } = await axios.get(`${URL}/products`);
-    // console.log(data);`
-
+    // console.log(data);
     dispatch({ type: actionTypes.GET_PRODUCTS_SUCCESS, payload: data });
   } catch (e) {
     console.log("Error while calling getProduct in redux folder", e.message);
