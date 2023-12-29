@@ -8,7 +8,6 @@ export const getProducts = () => async (dispatch, getState) => {
   // console.log(products);
   // If products are already present, return and don't make the request again
   if (products.length > 0) {
-    console.warn("hey product found");
     return;
   }
 
