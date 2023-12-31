@@ -6,6 +6,7 @@ import Home from "./components/Home/Home";
 import Cart from "./components/Cart/Cart";
 import DataProvider from "./context/DataProvider";
 import DetailView from "./components/Details/DetailView";
+import AdminPanel from "./components/Admin/AdminPanel";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AddProduct from "./components/Product/AddProduct";
@@ -22,6 +23,7 @@ function App() {
               <Route path="/product/:id" element={<DetailView />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/addProduct" element={<AddProduct />} />
+              <Route path="/admin" element={<AdminPanel />} />
             </Routes>
           </Box>
         </BrowserRouter>
