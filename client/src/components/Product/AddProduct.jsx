@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { addProduct } from "../../service/api";
 import {
   TextField,
@@ -11,7 +12,7 @@ import {
 
 const Container = styled(Box)`
   height: auto;
-  margin: 4.5rem 3rem 0 3rem;
+  margin: 3.7rem 3rem 0 3rem;
   overflow-y: hidden;
 `;
 const ButtonContainer = styled(Box)`
@@ -25,6 +26,13 @@ const Heading = styled(Typography)`
   font-weight: 500;
   margin: 10px 0;
   color: #67729d;
+`;
+const Subheading = styled(Link)`
+  font-size: 20px;
+  font-weight: 500;
+  margin-top:15px;
+  color: #67729d;
+  text-decoration: none;
 `;
 // #######################################################################################
 const ProductForm = () => {
@@ -67,23 +75,23 @@ const ProductForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
-try{
-
-  let response = await addProduct(formData);
-    if (!response) {
-      console.log("not submitted");
-    } else {
-      console.log(response);
+    // console.log(formData);
+    try {
+      let response = await addProduct(formData);
+      if (!response) {
+        console.log("not submitted");
+      } else {
+        // console.log(response);
+        alert("Product submitted Successfully");
+      }
+    } catch (e) {
+      console.log(e.message);
     }
-  }catch(e){
-    console.log(e.message);
-
-  }
   };
 
   return (
     <Container>
+      <Subheading to="/admin">AdminPanel</Subheading>
       <Heading>Add Product</Heading>
 
       <form onSubmit={handleSubmit}>
