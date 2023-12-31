@@ -1,24 +1,24 @@
-// import React from 'react'
-
-// const AdminPanel = () => {
-//   return (
-//     <div>AdminPanel</div>
-//   )
-// }
-
-// export default AdminPanel
-
-import React, { useEffect, useState } from "react";
-import { AiOutlineEdit } from "react-icons/ai";
-import { AiFillDelete } from "react-icons/ai";
-import axios from "axios";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { styled } from "@mui/material";
 
 import DataTable from "react-data-table-component";
 
-
 import { getProducts } from "../../redux/actions/productActions";
 import { useDispatch, useSelector } from "react-redux";
+
+const Delete = styled(DeleteIcon)`
+  color: #ef4040;
+`;
+
+const Edit = styled(EditIcon)`
+  color: #fff78a;
+  margin: 0 7px;
+`;
+
 // #####################################################
 const AdminPanel = () => {
   const history = useNavigate();
@@ -31,6 +31,18 @@ const AdminPanel = () => {
   console.log(products);
 
   //------------------- For Table ----------------
+  const customStyles = {
+    headCells: {
+      style: {
+        borderRight: "1px solid black",
+      },
+    },
+    cells: {
+      style: {
+        width: "200px !important",
+      },
+    },
+  };
   const columns = [
     {
       name: "Id",
@@ -97,14 +109,12 @@ const AdminPanel = () => {
       cell: (row) => (
         <>
           <Link to={`/edit/${row._id}`} target="_blank">
-            <AiOutlineEdit
-              className="mr-4 text-xl text-yellow-400 hover:text-yellow-700 transition-all duration-500 ease-in-out hover:scale-110"
-              LinkComponent={Link}
-              to={`/edit/${row._id}`}
+            <Edit
+            // LinkComponent={Link}
+            // to={`/edit/${row._id}`}
             />
           </Link>
-          <AiFillDelete
-            className="text-xl text-red-500 hover:text-red-600 transition-all duration-500 ease-in-out hover:scale-110"
+          <Delete
             onClick={() => {
               deleteHandler(row._id);
             }}
@@ -126,7 +136,7 @@ const AdminPanel = () => {
   return (
     <div>
       <DataTable
-        title="Employee Details"
+        title="Product Details"
         columns={columns}
         data={products}
         pagination
@@ -140,6 +150,7 @@ const AdminPanel = () => {
         noDataText="No data found"
         paginationRowsPerPageOptions={[10, 25, 50, 75, 100]}
         paginationRowsPerPage={10}
+        customStyles={customStyles}
       />
     </div>
   );
