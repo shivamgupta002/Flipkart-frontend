@@ -76,3 +76,14 @@ export const getProductById = async (req, res) => {
     return res.status(500).json(e.message);
   }
 };
+export const deleteProduct = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const response=await Product.deleteOne({id:id});
+    return res.status(201).json({message:response});
+    
+  } catch (e) {
+    console.log("Error find in Delete Product due to ", e.message);
+    return res.status(500).json(e.message);
+  }
+};
