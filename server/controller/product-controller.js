@@ -79,11 +79,48 @@ export const getProductById = async (req, res) => {
 export const deleteProduct = async (req, res) => {
   try {
     const _id = req.params.id;
-    const response=await Product.deleteOne({_id:_id});
-    return res.status(201).json({message:response});
-    
+    const response = await Product.deleteOne({ _id: _id });
+    return res.status(201).json({ message: response });
   } catch (e) {
     console.log("Error find in Delete Product due to ", e.message);
     return res.status(500).json(e.message);
+  }
+};
+
+export const editProduct = async (req, res) => {
+  const _id = req.params.id;
+  const {
+    id,
+    url,
+    detailUrl,
+    title,
+    price,
+    quantity,
+    description,
+    ExtraDiscount,
+    tagline,
+  } = req.body;
+  let product;
+  try {
+    product = await Product.findByIdAndUpdate(_id, {
+      id,
+      url,
+      detailUrl,
+      title,
+      price,
+      quantity,
+      description,
+      ExtraDiscount,
+      tagline,
+    });
+    product = await product.save();
+  } catch (e) {
+    console.log("Error find in Edit Product due to ", e.message);
+    return res.status(500).json(e.message);
+  }
+  if (!product) {
+    return res.status(500).json({ message: "Unable to Update by ID" });
+  } else {
+    return res.status(201).json({ message: "Product Update successfully" });
   }
 };
