@@ -9,12 +9,15 @@ import DataTable from "react-data-table-component";
 
 import { getProducts } from "../../redux/actions/productActions";
 import { useDispatch, useSelector } from "react-redux";
+import { deleteProduct } from "../../service/api";
 
 const Delete = styled(DeleteIcon)`
   color: #ef4040;
+  cursor: pointer;
 `;
 
 const Edit = styled(EditIcon)`
+  cursor: pointer;
   color: #fff78a;
   margin: 0 7px;
 `;
@@ -27,8 +30,7 @@ const AdminPanel = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProducts());
-  }, [dispatch]);
-  console.log(products);
+  }, [dispatch,products]);
 
   //------------------- For Table ----------------
   const customStyles = {
@@ -92,7 +94,7 @@ const AdminPanel = () => {
     {
       name: "Description",
       selector: (row) => row.description,
-      sortable: true,
+      sortable: false,
     },
     {
       name: "Extra discount",
@@ -116,22 +118,14 @@ const AdminPanel = () => {
           </Link>
           <Delete
             onClick={() => {
-              deleteHandler(row._id);
+              deleteProduct(row._id);
+              history("/addProduct");
             }}
           />
         </>
       ),
     },
   ];
-
-  //------------------- For Delete ----------------
-  const deleteHandler = async (_id) => {
-    console.log(_id);
-    // await axios
-    //   .delete(`http://localhost:5000/products/${_id}`)
-    //   .then((res) => res.data)
-    //   .then(() => history("/"));
-  };
 
   return (
     <div>

@@ -78,8 +78,8 @@ export const getProductById = async (req, res) => {
 };
 export const deleteProduct = async (req, res) => {
   try {
-    const id = req.params.id;
-    const response=await Product.deleteOne({id:id});
+    const _id = req.params.id;
+    const response=await Product.deleteOne({_id:_id});
     return res.status(201).json({message:response});
     
   } catch (e) {

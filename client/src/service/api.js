@@ -25,3 +25,12 @@ export const addProduct = async (data) => {
     // return e.response;
   }
 };
+export const deleteProduct = async (id) => {
+  try {
+    await axios.delete(`${URL}/deleteProduct/${id}`);
+    alert("Product deleted successfully");
+  } catch (e) {
+    console.log("Error while delete Product api", e.message);
+    // return e.response;
+  }
+};
