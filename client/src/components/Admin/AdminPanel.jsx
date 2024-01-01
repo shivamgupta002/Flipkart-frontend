@@ -30,7 +30,7 @@ const AdminPanel = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProducts());
-  }, [dispatch,products]);
+  }, [dispatch, products]);
 
   //------------------- For Table ----------------
   const customStyles = {
@@ -110,11 +110,8 @@ const AdminPanel = () => {
       name: "Edit",
       cell: (row) => (
         <>
-          <Link to={`/edit/${row._id}`} target="_blank">
-            <Edit
-            // LinkComponent={Link}
-            // to={`/edit/${row._id}`}
-            />
+          <Link onClick={() => alert("Edit will be coming soon")}>
+            <Edit />
           </Link>
           <Delete
             onClick={() => {
