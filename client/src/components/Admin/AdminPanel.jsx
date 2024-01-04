@@ -98,7 +98,7 @@ const AdminPanel = () => {
     },
     {
       name: "Extra discount",
-      selector: (row) => row.discount,
+      selector: (row) => row.ExtraDiscount,
       sortable: true,
     },
     {
@@ -111,7 +111,6 @@ const AdminPanel = () => {
       cell: (row) => (
         <>
           <Link to={`/editProduct/${row.id}`}>
-              to={`/editProduct/${row.id}`}
             <Edit />
           </Link>
           <Delete

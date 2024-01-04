@@ -221,7 +221,7 @@ const EditProduct = () => {
               <TextField
                 label="Extra Discount"
                 name="ExtraDiscount"
-                value={input?.discount || ""}
+                value={input?.ExtraDiscount || ""}
                 onChange={handleChange}
                 fullWidth
               />

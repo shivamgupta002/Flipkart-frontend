@@ -114,7 +114,7 @@ const Slide = ({ products, title, timer }) => {
                   <Image src={product.url} alt="img" />
                   <Text>{product.title.shortTitle}</Text>
                   <Typography style={{ color: "green" }}>
-                    {product.discount}
+                    {product.ExtraDiscount}
                   </Typography>
                   <Typography style={{ color: "#212121", opacity: "0.6" }}>
                     {product.tagline}
