@@ -10,6 +10,7 @@ import AdminPanel from "./components/Admin/AdminPanel";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AddProduct from "./components/Product/AddProduct";
+import EditProduct from "./components/Product/EditProduct";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
               <Route path="/cart" element={<Cart />} />
               <Route path="/addProduct" element={<AddProduct />} />
               <Route path="/admin" element={<AdminPanel />} />
+              <Route path="/editProduct/:id" element={<EditProduct />} />
             </Routes>
           </Box>
         </BrowserRouter>

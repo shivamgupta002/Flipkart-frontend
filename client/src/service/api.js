@@ -34,3 +34,25 @@ export const deleteProduct = async (id) => {
     // return e.response;
   }
 };
+export const productDetails = async (id) => {
+  try {
+    const { data } = await axios.get(`${URL}/product/${id}`);
+    // console.log(data);
+    return { data };
+  } catch (e) {
+    console.log("Error while get Product details api", e.message);
+  }
+};
+
+// Edit Product
+export const editProduct = async (data) => {
+  const { _id } = data;
+  console.log(_id);
+  try {
+    // console.log(data);
+    return await axios.put(`${URL}/editProduct/${_id}`, data);
+  } catch (e) {
+    console.log("Error while Add Product api", e.message);
+    // return e.response;
+  }
+};

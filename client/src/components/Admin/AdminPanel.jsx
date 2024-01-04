@@ -110,7 +110,8 @@ const AdminPanel = () => {
       name: "Edit",
       cell: (row) => (
         <>
-          <Link onClick={() => alert("Edit will be coming soon")}>
+          <Link to={`/editProduct/${row.id}`}>
+              to={`/editProduct/${row.id}`}
             <Edit />
           </Link>
           <Delete
