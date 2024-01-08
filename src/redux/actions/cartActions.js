@@ -1,7 +1,8 @@
 import axios from "axios";
 import * as actionType from "../constants/cartConstants";
 
-const URL = "http://localhost:5000";
+const URL = "https://flipkartclonebackend-3icu.onrender.com";
+// const URL = "http://localhost:5000";
 
 export const addToCart = (id, quantity) => async (dispatch) => {
   try {
