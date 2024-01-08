@@ -25,12 +25,12 @@ const Edit = styled(EditIcon)`
 // #####################################################
 const AdminPanel = () => {
   const history = useNavigate();
+  const dispatch = useDispatch();
   const { products } = useSelector((state) => state.getProducts);
 
-  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProducts());
-  }, [dispatch, products]);
+  }, [dispatch, products, history]);
 
   //------------------- For Table ----------------
   const customStyles = {
